@@ -1,0 +1,52 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "authorID",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "authorName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "category",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeCreated",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "placeCreated",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numberOfLove",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberOfComment",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "urlImage",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161126031859",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "story",
+    "pagination": "infinite-scroll"
+}

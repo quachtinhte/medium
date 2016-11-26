@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "userID",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "storyID",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "timeCommented",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161126032619",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "comment",
+    "pagination": "infinite-scroll"
+}
