@@ -41,6 +41,7 @@
                     <th jh-sort-by="content"><span>Content</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="timeCommented"><span>Time Commented</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userName"><span>User Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="storyOrder"><span>Story Order</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -52,6 +53,7 @@
                     <td>{{comment.content}}</td>
                     <td>{{comment.timeCommented | date:'medium'}}</td>
                     <td>{{comment.userName}}</td>
+                    <td>{{comment.storyOrder}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

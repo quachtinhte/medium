@@ -67,7 +67,7 @@ class CommentGatlingTest extends Simulation {
             .exec(http("Create new comment")
             .post("/api/comments")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "userID":"0", "storyID":"0", "content":null, "timeCommented":"2020-01-01T00:00:00.000Z", "userName":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "userID":"0", "storyID":"0", "content":null, "timeCommented":"2020-01-01T00:00:00.000Z", "userName":"SAMPLE_TEXT", "storyOrder":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_comment_url"))).exitHereIfFailed
             .pause(10)

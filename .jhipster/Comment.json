@@ -22,6 +22,10 @@
         {
             "fieldName": "userName",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "storyOrder",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20161126032619",

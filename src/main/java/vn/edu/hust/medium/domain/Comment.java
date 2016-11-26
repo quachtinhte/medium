@@ -40,6 +40,9 @@ public class Comment implements Serializable {
     @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "story_order")
+    private Integer storyOrder;
+
     public Long getId() {
         return id;
     }
@@ -113,6 +116,19 @@ public class Comment implements Serializable {
         this.userName = userName;
     }
 
+    public Integer getStoryOrder() {
+        return storyOrder;
+    }
+
+    public Comment storyOrder(Integer storyOrder) {
+        this.storyOrder = storyOrder;
+        return this;
+    }
+
+    public void setStoryOrder(Integer storyOrder) {
+        this.storyOrder = storyOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -142,6 +158,7 @@ public class Comment implements Serializable {
             ", content='" + content + "'" +
             ", timeCommented='" + timeCommented + "'" +
             ", userName='" + userName + "'" +
+            ", storyOrder='" + storyOrder + "'" +
             '}';
     }
 }

@@ -100,6 +100,7 @@
                                 content: null,
                                 timeCommented: null,
                                 userName: null,
+                                storyOrder: null,
                                 id: null
                             };
                         }

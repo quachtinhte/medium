@@ -60,6 +60,9 @@ public class CommentResourceIntTest {
     private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_STORY_ORDER = 1;
+    private static final Integer UPDATED_STORY_ORDER = 2;
+
     @Inject
     private CommentRepository commentRepository;
 
@@ -102,7 +105,8 @@ public class CommentResourceIntTest {
                 .storyID(DEFAULT_STORY_ID)
                 .content(DEFAULT_CONTENT)
                 .timeCommented(DEFAULT_TIME_COMMENTED)
-                .userName(DEFAULT_USER_NAME);
+                .userName(DEFAULT_USER_NAME)
+                .storyOrder(DEFAULT_STORY_ORDER);
         return comment;
     }
 
@@ -133,6 +137,7 @@ public class CommentResourceIntTest {
         assertThat(testComment.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testComment.getTimeCommented()).isEqualTo(DEFAULT_TIME_COMMENTED);
         assertThat(testComment.getUserName()).isEqualTo(DEFAULT_USER_NAME);
+        assertThat(testComment.getStoryOrder()).isEqualTo(DEFAULT_STORY_ORDER);
 
         // Validate the Comment in ElasticSearch
         Comment commentEs = commentSearchRepository.findOne(testComment.getId());
@@ -154,7 +159,8 @@ public class CommentResourceIntTest {
                 .andExpect(jsonPath("$.[*].storyID").value(hasItem(DEFAULT_STORY_ID)))
                 .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
                 .andExpect(jsonPath("$.[*].timeCommented").value(hasItem(DEFAULT_TIME_COMMENTED_STR)))
-                .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())));
+                .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+                .andExpect(jsonPath("$.[*].storyOrder").value(hasItem(DEFAULT_STORY_ORDER)));
     }
 
     @Test
@@ -172,7 +178,8 @@ public class CommentResourceIntTest {
             .andExpect(jsonPath("$.storyID").value(DEFAULT_STORY_ID))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
             .andExpect(jsonPath("$.timeCommented").value(DEFAULT_TIME_COMMENTED_STR))
-            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()));
+            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
+            .andExpect(jsonPath("$.storyOrder").value(DEFAULT_STORY_ORDER));
     }
 
     @Test
@@ -198,7 +205,8 @@ public class CommentResourceIntTest {
                 .storyID(UPDATED_STORY_ID)
                 .content(UPDATED_CONTENT)
                 .timeCommented(UPDATED_TIME_COMMENTED)
-                .userName(UPDATED_USER_NAME);
+                .userName(UPDATED_USER_NAME)
+                .storyOrder(UPDATED_STORY_ORDER);
 
         restCommentMockMvc.perform(put("/api/comments")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -214,6 +222,7 @@ public class CommentResourceIntTest {
         assertThat(testComment.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testComment.getTimeCommented()).isEqualTo(UPDATED_TIME_COMMENTED);
         assertThat(testComment.getUserName()).isEqualTo(UPDATED_USER_NAME);
+        assertThat(testComment.getStoryOrder()).isEqualTo(UPDATED_STORY_ORDER);
 
         // Validate the Comment in ElasticSearch
         Comment commentEs = commentSearchRepository.findOne(testComment.getId());
@@ -258,6 +267,7 @@ public class CommentResourceIntTest {
             .andExpect(jsonPath("$.[*].storyID").value(hasItem(DEFAULT_STORY_ID)))
             .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
             .andExpect(jsonPath("$.[*].timeCommented").value(hasItem(DEFAULT_TIME_COMMENTED_STR)))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())));
+            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+            .andExpect(jsonPath("$.[*].storyOrder").value(hasItem(DEFAULT_STORY_ORDER)));
     }
 }
