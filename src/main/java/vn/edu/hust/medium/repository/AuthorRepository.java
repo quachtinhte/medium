@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface AuthorRepository extends JpaRepository<Author,Long> {
-
+  public Author findOneByNameLike(String name);
+  public Author findOneByEmailLike(String email);
 }

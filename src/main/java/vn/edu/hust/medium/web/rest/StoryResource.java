@@ -34,7 +34,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class StoryResource {
 
     private final Logger log = LoggerFactory.getLogger(StoryResource.class);
-        
+
     @Inject
     private StoryRepository storyRepository;
 
@@ -139,7 +139,7 @@ public class StoryResource {
      * SEARCH  /_search/stories?query=:query : search for the story corresponding
      * to the query.
      *
-     * @param query the query of the story search 
+     * @param query the query of the story search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

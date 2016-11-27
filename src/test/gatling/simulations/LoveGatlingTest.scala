@@ -67,7 +67,7 @@ class LoveGatlingTest extends Simulation {
             .exec(http("Create new love")
             .post("/api/loves")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "userID":"0", "storyID":"0", "userName":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "userID":"0", "storyID":"0", "userName":"SAMPLE_TEXT", "storyOrder":"0"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_love_url"))).exitHereIfFailed
             .pause(10)

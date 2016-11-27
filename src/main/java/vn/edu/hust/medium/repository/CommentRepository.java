@@ -11,5 +11,10 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface CommentRepository extends JpaRepository<Comment,Long> {
-  Comment findOneByStoryIDAndStoryOrder(int storyid, int commentOrder);
+  public Comment findOneByStoryIDAndStoryOrder(int storyid, int commentOrder);
+  public List<Comment> findAllByStoryIDOrderByTimeCommentedDesc(int storyid);
+  // public void deleteByStoryIDAndStoryOrder(int storyid,int storyOrder);
+  // public void deleteAllByStoryID(int storyid);
+  //public void
+  //public void
 }

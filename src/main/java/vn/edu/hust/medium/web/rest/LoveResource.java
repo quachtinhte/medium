@@ -34,7 +34,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class LoveResource {
 
     private final Logger log = LoggerFactory.getLogger(LoveResource.class);
-        
+
     @Inject
     private LoveRepository loveRepository;
 
@@ -119,7 +119,21 @@ public class LoveResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
+    /**
+    * public List<Love> findAllByStoryID(int storyID);
+    * public Love findOneByStoryIDAndStoryOrder(int storyID, int storyOrder);
+    **/
+    @GetMapping("loves/{id}/{order}")
+    @Timed
+    public ResponseEntity<Love> getLoveByStoryIDAndOrder(@PathVariable("id") int id, @PathVariable("order") int order)throws URISyntaxException{
+      log.debug("REST request to get Love : {} and {}", id,order);
+      Love love = loveRepository.findOneByStoryIDAndStoryOrder(id,order);
+      return Optional.ofNullable(love)
+          .map(result -> new ResponseEntity<>(
+              result,
+              HttpStatus.OK))
+          .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
     /**
      * DELETE  /loves/:id : delete the "id" love.
      *
@@ -139,7 +153,7 @@ public class LoveResource {
      * SEARCH  /_search/loves?query=:query : search for the love corresponding
      * to the query.
      *
-     * @param query the query of the love search 
+     * @param query the query of the love search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

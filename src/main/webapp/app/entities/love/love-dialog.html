@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -30,6 +30,22 @@
             <input type="text" class="form-control" name="userName" id="field_userName"
                     ng-model="vm.love.userName"
                      />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_storyOrder">Story Order</label>
+            <input type="number" class="form-control" name="storyOrder" id="field_storyOrder"
+                    ng-model="vm.love.storyOrder"
+                    min="0" />
+            <div ng-show="editForm.storyOrder.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.storyOrder.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.storyOrder.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
         </div>
 
     </div>

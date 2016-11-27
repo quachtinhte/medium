@@ -11,5 +11,8 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface LoveRepository extends JpaRepository<Love,Long> {
-
+  // public List<Love> findAllByStoryID(int storyID);
+  public Love findOneByStoryIDAndStoryOrder(int storyID, int storyOrder);
+  //@Query("Select id from Love where ")
+  public void deleteLoveByStoryIDAndStoryOrder(int storyID,int storyOrder);
 }

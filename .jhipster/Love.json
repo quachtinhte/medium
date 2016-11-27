@@ -13,6 +13,14 @@
         {
             "fieldName": "userName",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "storyOrder",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": "0"
         }
     ],
     "changelogDate": "20161126032505",

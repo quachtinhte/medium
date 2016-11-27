@@ -11,5 +11,14 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface StoryRepository extends JpaRepository<Story,Long> {
-
+  public List<Story> findAllByAuthorID(int id);
+  public List<Story> findAllByCategory(String category);
+  //@Query()
+  public List<Story> findAllByCategoryOrderByNumberOfLoveDesc(int storyid);
+  public List<Story> findAllByCategoryOrderByNumberOfCommentDesc(int storyid);
+  //
+  public List<Story> findAllByCategoryOrderByTimeCreatedDesc(int storyid);
+  //
+  public List<Story> findAllByOrderByNumberOfCommentDesc();
+  public List<Story> findAllByOrderByNumberOfLoveDesc();
 }

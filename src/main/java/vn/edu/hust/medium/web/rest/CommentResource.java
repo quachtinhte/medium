@@ -34,7 +34,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class CommentResource {
 
     private final Logger log = LoggerFactory.getLogger(CommentResource.class);
-        
+
     @Inject
     private CommentRepository commentRepository;
 
@@ -101,6 +101,20 @@ public class CommentResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comments");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    /**
+    *
+    **/
+    @GetMapping("/comments/{storyID}/{storyOrder}")
+    @Timed
+    public ResponseEntity<Comment> getCommentByStoryIDAndStoryOrder(@PathVariable("storyID") int storyID, @PathVariable("storyOrder") int storyOrder) throws URISyntaxException{
+      log.debug("REST request to get a comment of Story");
+      Comment comment= commentRepository.findOneByStoryIDAndStoryOrder(storyID,storyOrder);
+      return Optional.ofNullable(comment)
+          .map(result -> new ResponseEntity<>(
+              result,
+              HttpStatus.OK))
+          .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     /**
      * GET  /comments/:id : get the "id" comment.
@@ -119,6 +133,10 @@ public class CommentResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    /**
+    *public void deleteByStoryIDAndStoryOrder(int storyid,int storyOrder);
+    public void deleteAllByStoryID(int storyid);
+    **/
 
     /**
      * DELETE  /comments/:id : delete the "id" comment.
@@ -139,7 +157,7 @@ public class CommentResource {
      * SEARCH  /_search/comments?query=:query : search for the comment corresponding
      * to the query.
      *
-     * @param query the query of the comment search 
+     * @param query the query of the comment search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

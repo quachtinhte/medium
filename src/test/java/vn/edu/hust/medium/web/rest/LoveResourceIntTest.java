@@ -47,6 +47,9 @@ public class LoveResourceIntTest {
     private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
     private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
 
+    private static final Integer DEFAULT_STORY_ORDER = 0;
+    private static final Integer UPDATED_STORY_ORDER = 1;
+
     @Inject
     private LoveRepository loveRepository;
 
@@ -87,7 +90,8 @@ public class LoveResourceIntTest {
         Love love = new Love()
                 .userID(DEFAULT_USER_ID)
                 .storyID(DEFAULT_STORY_ID)
-                .userName(DEFAULT_USER_NAME);
+                .userName(DEFAULT_USER_NAME)
+                .storyOrder(DEFAULT_STORY_ORDER);
         return love;
     }
 
@@ -116,6 +120,7 @@ public class LoveResourceIntTest {
         assertThat(testLove.getUserID()).isEqualTo(DEFAULT_USER_ID);
         assertThat(testLove.getStoryID()).isEqualTo(DEFAULT_STORY_ID);
         assertThat(testLove.getUserName()).isEqualTo(DEFAULT_USER_NAME);
+        assertThat(testLove.getStoryOrder()).isEqualTo(DEFAULT_STORY_ORDER);
 
         // Validate the Love in ElasticSearch
         Love loveEs = loveSearchRepository.findOne(testLove.getId());
@@ -135,7 +140,8 @@ public class LoveResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(love.getId().intValue())))
                 .andExpect(jsonPath("$.[*].userID").value(hasItem(DEFAULT_USER_ID)))
                 .andExpect(jsonPath("$.[*].storyID").value(hasItem(DEFAULT_STORY_ID)))
-                .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())));
+                .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+                .andExpect(jsonPath("$.[*].storyOrder").value(hasItem(DEFAULT_STORY_ORDER)));
     }
 
     @Test
@@ -151,7 +157,8 @@ public class LoveResourceIntTest {
             .andExpect(jsonPath("$.id").value(love.getId().intValue()))
             .andExpect(jsonPath("$.userID").value(DEFAULT_USER_ID))
             .andExpect(jsonPath("$.storyID").value(DEFAULT_STORY_ID))
-            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()));
+            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
+            .andExpect(jsonPath("$.storyOrder").value(DEFAULT_STORY_ORDER));
     }
 
     @Test
@@ -175,7 +182,8 @@ public class LoveResourceIntTest {
         updatedLove
                 .userID(UPDATED_USER_ID)
                 .storyID(UPDATED_STORY_ID)
-                .userName(UPDATED_USER_NAME);
+                .userName(UPDATED_USER_NAME)
+                .storyOrder(UPDATED_STORY_ORDER);
 
         restLoveMockMvc.perform(put("/api/loves")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -189,6 +197,7 @@ public class LoveResourceIntTest {
         assertThat(testLove.getUserID()).isEqualTo(UPDATED_USER_ID);
         assertThat(testLove.getStoryID()).isEqualTo(UPDATED_STORY_ID);
         assertThat(testLove.getUserName()).isEqualTo(UPDATED_USER_NAME);
+        assertThat(testLove.getStoryOrder()).isEqualTo(UPDATED_STORY_ORDER);
 
         // Validate the Love in ElasticSearch
         Love loveEs = loveSearchRepository.findOne(testLove.getId());
@@ -231,6 +240,7 @@ public class LoveResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(love.getId().intValue())))
             .andExpect(jsonPath("$.[*].userID").value(hasItem(DEFAULT_USER_ID)))
             .andExpect(jsonPath("$.[*].storyID").value(hasItem(DEFAULT_STORY_ID)))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())));
+            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+            .andExpect(jsonPath("$.[*].storyOrder").value(hasItem(DEFAULT_STORY_ORDER)));
     }
 }

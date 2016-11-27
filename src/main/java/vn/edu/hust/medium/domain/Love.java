@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -31,6 +32,10 @@ public class Love implements Serializable {
 
     @Column(name = "user_name")
     private String userName;
+
+    @Min(value = 0)
+    @Column(name = "story_order")
+    private Integer storyOrder;
 
     public Long getId() {
         return id;
@@ -79,6 +84,19 @@ public class Love implements Serializable {
         this.userName = userName;
     }
 
+    public Integer getStoryOrder() {
+        return storyOrder;
+    }
+
+    public Love storyOrder(Integer storyOrder) {
+        this.storyOrder = storyOrder;
+        return this;
+    }
+
+    public void setStoryOrder(Integer storyOrder) {
+        this.storyOrder = storyOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -106,6 +124,7 @@ public class Love implements Serializable {
             ", userID='" + userID + "'" +
             ", storyID='" + storyID + "'" +
             ", userName='" + userName + "'" +
+            ", storyOrder='" + storyOrder + "'" +
             '}';
     }
 }
