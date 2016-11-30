@@ -15,4 +15,5 @@ public interface LoveRepository extends JpaRepository<Love,Long> {
   public Love findOneByStoryIDAndStoryOrder(int storyID, int storyOrder);
   //@Query("Select id from Love where ")
   public void deleteLoveByStoryIDAndStoryOrder(int storyID,int storyOrder);
+  public Love findOneByStoryIDOrderByStoryOrderDesc(int storyID);
 }

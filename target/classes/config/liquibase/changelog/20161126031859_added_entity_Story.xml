@@ -61,6 +61,10 @@
                 <constraints nullable="true" />
             </column>
             
+            <column name="summary" type="clob">
+                <constraints nullable="true" />
+            </column>
+            
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         

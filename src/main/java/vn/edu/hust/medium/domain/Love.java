@@ -85,7 +85,9 @@ public class Love implements Serializable {
     }
 
     public Integer getStoryOrder() {
+      if(storyOrder!=null)
         return storyOrder;
+        else return 0;
     }
 
     public Love storyOrder(Integer storyOrder) {

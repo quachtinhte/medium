@@ -71,6 +71,9 @@ public class StoryResourceIntTest {
     private static final String DEFAULT_URL_IMAGE = "AAAAAAAAAA";
     private static final String UPDATED_URL_IMAGE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_SUMMARY = "AAAAAAAAAA";
+    private static final String UPDATED_SUMMARY = "BBBBBBBBBB";
+
     @Inject
     private StoryRepository storyRepository;
 
@@ -118,7 +121,8 @@ public class StoryResourceIntTest {
                 .placeCreated(DEFAULT_PLACE_CREATED)
                 .numberOfLove(DEFAULT_NUMBER_OF_LOVE)
                 .numberOfComment(DEFAULT_NUMBER_OF_COMMENT)
-                .urlImage(DEFAULT_URL_IMAGE);
+                .urlImage(DEFAULT_URL_IMAGE)
+                .summary(DEFAULT_SUMMARY);
         return story;
     }
 
@@ -154,6 +158,7 @@ public class StoryResourceIntTest {
         assertThat(testStory.getNumberOfLove()).isEqualTo(DEFAULT_NUMBER_OF_LOVE);
         assertThat(testStory.getNumberOfComment()).isEqualTo(DEFAULT_NUMBER_OF_COMMENT);
         assertThat(testStory.getUrlImage()).isEqualTo(DEFAULT_URL_IMAGE);
+        assertThat(testStory.getSummary()).isEqualTo(DEFAULT_SUMMARY);
 
         // Validate the Story in ElasticSearch
         Story storyEs = storySearchRepository.findOne(testStory.getId());
@@ -180,7 +185,8 @@ public class StoryResourceIntTest {
                 .andExpect(jsonPath("$.[*].placeCreated").value(hasItem(DEFAULT_PLACE_CREATED.toString())))
                 .andExpect(jsonPath("$.[*].numberOfLove").value(hasItem(DEFAULT_NUMBER_OF_LOVE)))
                 .andExpect(jsonPath("$.[*].numberOfComment").value(hasItem(DEFAULT_NUMBER_OF_COMMENT)))
-                .andExpect(jsonPath("$.[*].urlImage").value(hasItem(DEFAULT_URL_IMAGE.toString())));
+                .andExpect(jsonPath("$.[*].urlImage").value(hasItem(DEFAULT_URL_IMAGE.toString())))
+                .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())));
     }
 
     @Test
@@ -203,7 +209,8 @@ public class StoryResourceIntTest {
             .andExpect(jsonPath("$.placeCreated").value(DEFAULT_PLACE_CREATED.toString()))
             .andExpect(jsonPath("$.numberOfLove").value(DEFAULT_NUMBER_OF_LOVE))
             .andExpect(jsonPath("$.numberOfComment").value(DEFAULT_NUMBER_OF_COMMENT))
-            .andExpect(jsonPath("$.urlImage").value(DEFAULT_URL_IMAGE.toString()));
+            .andExpect(jsonPath("$.urlImage").value(DEFAULT_URL_IMAGE.toString()))
+            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()));
     }
 
     @Test
@@ -234,7 +241,8 @@ public class StoryResourceIntTest {
                 .placeCreated(UPDATED_PLACE_CREATED)
                 .numberOfLove(UPDATED_NUMBER_OF_LOVE)
                 .numberOfComment(UPDATED_NUMBER_OF_COMMENT)
-                .urlImage(UPDATED_URL_IMAGE);
+                .urlImage(UPDATED_URL_IMAGE)
+                .summary(UPDATED_SUMMARY);
 
         restStoryMockMvc.perform(put("/api/stories")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -255,6 +263,7 @@ public class StoryResourceIntTest {
         assertThat(testStory.getNumberOfLove()).isEqualTo(UPDATED_NUMBER_OF_LOVE);
         assertThat(testStory.getNumberOfComment()).isEqualTo(UPDATED_NUMBER_OF_COMMENT);
         assertThat(testStory.getUrlImage()).isEqualTo(UPDATED_URL_IMAGE);
+        assertThat(testStory.getSummary()).isEqualTo(UPDATED_SUMMARY);
 
         // Validate the Story in ElasticSearch
         Story storyEs = storySearchRepository.findOne(testStory.getId());
@@ -304,6 +313,7 @@ public class StoryResourceIntTest {
             .andExpect(jsonPath("$.[*].placeCreated").value(hasItem(DEFAULT_PLACE_CREATED.toString())))
             .andExpect(jsonPath("$.[*].numberOfLove").value(hasItem(DEFAULT_NUMBER_OF_LOVE)))
             .andExpect(jsonPath("$.[*].numberOfComment").value(hasItem(DEFAULT_NUMBER_OF_COMMENT)))
-            .andExpect(jsonPath("$.[*].urlImage").value(hasItem(DEFAULT_URL_IMAGE.toString())));
+            .andExpect(jsonPath("$.[*].urlImage").value(hasItem(DEFAULT_URL_IMAGE.toString())))
+            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())));
     }
 }

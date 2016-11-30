@@ -67,7 +67,7 @@ class StoryGatlingTest extends Simulation {
             .exec(http("Create new story")
             .post("/api/stories")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "title":"SAMPLE_TEXT", "content":null, "authorID":"0", "authorName":"SAMPLE_TEXT", "category":"SAMPLE_TEXT", "timeCreated":"2020-01-01T00:00:00.000Z", "placeCreated":"SAMPLE_TEXT", "numberOfLove":"0", "numberOfComment":"0", "urlImage":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "title":"SAMPLE_TEXT", "content":null, "authorID":"0", "authorName":"SAMPLE_TEXT", "category":"SAMPLE_TEXT", "timeCreated":"2020-01-01T00:00:00.000Z", "placeCreated":"SAMPLE_TEXT", "numberOfLove":"0", "numberOfComment":"0", "urlImage":"SAMPLE_TEXT", "summary":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_story_url"))).exitHereIfFailed
             .pause(10)

@@ -52,14 +52,32 @@ public class CommentResource {
     @Timed
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) throws URISyntaxException {
         log.debug("REST request to save Comment : {}", comment);
-        if (comment.getId() != null) {
+        if (comment.getId() != null) {//Có id thì sẽ là badRequest
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("comment", "idexists", "A new comment cannot already have an ID")).body(null);
         }
-        Comment result = commentRepository.save(comment);
-        commentSearchRepository.save(result);
-        return ResponseEntity.created(new URI("/api/comments/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("comment", result.getId().toString()))
-            .body(result);
+        //Đoạn chương trình phụ này có thể bỏ đi nếu ghi đè được phương thức save
+        Comment resource = commentRepository.findTopByStoryIDOrderByStoryOrderDesc(comment.getStoryID());
+	//?
+        System.out.println("\n"+resource);
+        if (resource!=null)
+        {
+          comment.setStoryOrder(resource.getStoryOrder()+1);
+          //
+          Comment result = commentRepository.save(comment);
+          commentSearchRepository.save(result);
+          return ResponseEntity.created(new URI("/api/comments/" + result.getId()))
+              .headers(HeaderUtil.createEntityCreationAlert("comment", result.getId().toString()))
+              .body(result);
+        }
+        comment.setStoryOrder(0);
+          //
+	  Comment result = commentRepository.save(comment);
+	  commentSearchRepository.save(result);
+	  return ResponseEntity.created(new URI("/api/comments/" + result.getId()))
+	      .headers(HeaderUtil.createEntityCreationAlert("comment", result.getId().toString()))
+	      .body(result);
+        //
+
     }
 
     /**
@@ -98,6 +116,10 @@ public class CommentResource {
         throws URISyntaxException {
         log.debug("REST request to get a page of Comments");
         Page<Comment> page = commentRepository.findAll(pageable);
+        //
+        // List<Comment> page2 = commentRepository.findOneByStoryIDOrderByStoryOrderAsc(2);
+        // System.out.println("\n --"+page2+"\n");
+        //
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comments");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -127,6 +149,7 @@ public class CommentResource {
     public ResponseEntity<Comment> getComment(@PathVariable Long id) {
         log.debug("REST request to get Comment : {}", id);
         Comment comment = commentRepository.findOne(id);
+        System.out.println(comment.getStoryOrder());
         return Optional.ofNullable(comment)
             .map(result -> new ResponseEntity<>(
                 result,

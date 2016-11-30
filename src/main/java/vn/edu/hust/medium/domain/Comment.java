@@ -117,7 +117,9 @@ public class Comment implements Serializable {
     }
 
     public Integer getStoryOrder() {
+        if (storyOrder!=null)
         return storyOrder;
+        else return 0;
     }
 
     public Comment storyOrder(Integer storyOrder) {

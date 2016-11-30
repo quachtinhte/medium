@@ -42,6 +42,11 @@
         {
             "fieldName": "urlImage",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "summary",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
     "changelogDate": "20161126031859",

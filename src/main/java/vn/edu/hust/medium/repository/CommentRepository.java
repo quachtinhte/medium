@@ -13,8 +13,9 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment,Long> {
   public Comment findOneByStoryIDAndStoryOrder(int storyid, int commentOrder);
   public List<Comment> findAllByStoryIDOrderByTimeCommentedDesc(int storyid);
-  // public void deleteByStoryIDAndStoryOrder(int storyid,int storyOrder);
-  // public void deleteAllByStoryID(int storyid);
-  //public void
-  //public void
+
+  //RetainInfo findTopByCountryOrderByRetVersionDesc(String country);
+  public Comment findTopByStoryIDOrderByStoryOrderDesc(int storyid);
+  public List<Comment> findOneByStoryIDOrderByStoryOrderAsc(int storyid);
+
 }

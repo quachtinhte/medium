@@ -1,0 +1,31 @@
+package vn.edu.hust.medium.repository;
+
+import vn.edu.hust.medium.domain.Comment;
+
+import org.springframework.data.jpa.repository.*;
+
+import java.util.List;
+
+/**
+ * Spring Data JPA repository for the Comment entity.
+ */
+@SuppressWarnings("unused")
+public interface CommentRepository extends JpaRepository<Comment,Long> {
+  public Comment findOneByStoryIDAndStoryOrder(int storyid, int commentOrder);
+  public List<Comment> findAllByStoryIDOrderByTimeCommentedDesc(int storyid);
+
+  public Comment findOneByStoryIDOrderByStoryOrderDesc(int storyid);
+  //@Modifying
+  //@Query("insert into comment(`user_id`,`story_id`, `content`, `time_commented`,`user_name`,`story_order`) values (1,1,\"xxxx\",,\"admin\",1)")
+//  Comment save(Comment comment);
+  //Comment update(Comment comment);
+//   @Modifying
+// @Query("update User u set u.firstname = ?1 where u.lastname = ?2")
+// int setFixedFirstnameFor(String firstname, String lastname);
+  // @Query("insert into comment(``)")
+  // public void saveByOrder(int user_id, int story_id, string content,);
+  // public void deleteByStoryIDAndStoryOrder(int storyid,int storyOrder);
+  // public void deleteAllByStoryID(int storyid);
+  //public void
+  //public void
+}

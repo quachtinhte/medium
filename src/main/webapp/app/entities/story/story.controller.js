@@ -5,11 +5,15 @@
         .module('mediumApp')
         .controller('StoryController', StoryController);
 
-    StoryController.$inject = ['$scope', '$state', 'DataUtils', 'Story', 'StorySearch', 'ParseLinks', 'AlertService'];
+    StoryController.$inject = ['$scope', '$state', 'DataUtils', 'Story', 'StorySearch', 'ParseLinks', 'AlertService','$resource','Principal'];
 
-    function StoryController ($scope, $state, DataUtils, Story, StorySearch, ParseLinks, AlertService) {
+    function StoryController ($scope, $state, DataUtils, Story, StorySearch, ParseLinks, AlertService, $resource,Principal) {
         var vm = this;
-
+        /*
+        *
+        *
+        *
+        */
         vm.stories = [];
         vm.loadPage = loadPage;
         vm.page = 0;
@@ -24,21 +28,32 @@
         vm.search = search;
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
+        /*
+        *new
+        */
+        vm.account = null;
+        vm.isSaving=true;
+		vm.isAuthenticated=null;
+		vm.save = save;
+		//
+		vm.info= null;
 
+		//
         loadAll();
+        //getAccount();
 
         function loadAll () {
             if (vm.currentSearch) {
                 StorySearch.query({
                     query: vm.currentSearch,
                     page: vm.page,
-                    size: 20,
+                    size: 1,
                     sort: sort()
                 }, onSuccess, onError);
             } else {
                 Story.query({
                     page: vm.page,
-                    size: 20,
+                    size: 1,
                     sort: sort()
                 }, onSuccess, onError);
             }
@@ -85,7 +100,7 @@
             vm.searchQuery = null;
             vm.currentSearch = null;
             vm.loadAll();
-        }
+        }//2016-11-28 09:30:34.933
 
         function search (searchQuery) {
             if (!searchQuery){
@@ -100,6 +115,61 @@
             vm.reverse = false;
             vm.currentSearch = searchQuery;
             vm.loadAll();
+        }
+
+        function getAccount(){
+          Principal.identity().then(function(account){
+            vm.account = account;
+            vm.isAuthenticated = Principal.isAuthenticated;
+            var Info= $resource('api/authors'+vm.account.id,{},{'charge':{method:'GET'}});
+            $scope.info=Info.get({activated: true});
+            $scope.info.$promise.then(function(data){
+                vm.info=data;
+              });
+          });
+        }
+
+        function save(){
+          var contentLength=vm.story.content.length;
+          var titleLength=vm.story.title.length;
+          //
+          if(titleLength<=0);
+          //
+          var User = $resource('api/account',{},{'charge':{method:'GET'}});
+      		$scope.user=User.get({activated: true});
+      		$scope.user.$promise.then(function(data){
+
+            vm.story.author=data.login;
+            vm.story.authorName=data.firstName+" "+data.lastName;
+
+            vm.story.urlImage='xxx.com';
+            //timeCreated
+            var d = new Date();
+            vm.story.timeCreated=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+            vm.story.numberOfLove=0;
+            vm.story.numberOfComment=0;
+
+            vm.isSaving = true;
+            if (vm.story.id !== null) {
+
+              Story.update(vm.story, onSaveSuccess, onSaveError);
+			        console.log(vm.story);
+            } else {
+                  Story.save(vm.story, onSaveSuccess, onSaveError);
+  		            console.log(vm.story);
+            }
+      			function onSaveSuccess (result) {
+      				$scope.$emit('mediumApp:storyUpdate', result);
+      				//$uibModalInstance.close(result);
+      				$state.go('story', null, { reload: 'story' });
+      				//vm.isSaving = false;
+              	}
+
+      			function onSaveError () {
+      				vm.isSaving = false;
+      			}
+          });
+          //
         }
     }
 })();

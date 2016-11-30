@@ -55,11 +55,28 @@ public class LoveResource {
         if (love.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("love", "idexists", "A new love cannot already have an ID")).body(null);
         }
-        Love result = loveRepository.save(love);
-        loveSearchRepository.save(result);
-        return ResponseEntity.created(new URI("/api/loves/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("love", result.getId().toString()))
-            .body(result);
+        //Sẽ sửa lại nếu tìm được cách ghi đè
+        Love resource = loveRepository.findOneByStoryIDOrderByStoryOrderDesc(love.getStoryID());
+        if (resource!=null)
+        {
+          love.setStoryOrder(resource.getStoryOrder()+1);
+          //
+          Love result = loveRepository.save(love);
+          loveSearchRepository.save(result);
+          return ResponseEntity.created(new URI("/api/loves/" + result.getId()))
+              .headers(HeaderUtil.createEntityCreationAlert("love", result.getId().toString()))
+              .body(result);
+        }
+        else
+        {
+          love.setStoryOrder(0);
+          //
+          Love result = loveRepository.save(love);
+          loveSearchRepository.save(result);
+          return ResponseEntity.created(new URI("/api/loves/" + result.getId()))
+              .headers(HeaderUtil.createEntityCreationAlert("love", result.getId().toString()))
+              .body(result);
+        }
     }
 
     /**

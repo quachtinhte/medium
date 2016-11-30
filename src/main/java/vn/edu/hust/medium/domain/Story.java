@@ -55,6 +55,10 @@ public class Story implements Serializable {
     @Column(name = "url_image")
     private String urlImage;
 
+    @Lob
+    @Column(name = "summary")
+    private String summary;
+
     public Long getId() {
         return id;
     }
@@ -193,6 +197,19 @@ public class Story implements Serializable {
         this.urlImage = urlImage;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public Story summary(String summary) {
+        this.summary = summary;
+        return this;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -227,6 +244,7 @@ public class Story implements Serializable {
             ", numberOfLove='" + numberOfLove + "'" +
             ", numberOfComment='" + numberOfComment + "'" +
             ", urlImage='" + urlImage + "'" +
+            ", summary='" + summary + "'" +
             '}';
     }
 }

@@ -7,6 +7,8 @@ vn/edu/hust/medium/async/ExceptionHandlingAsyncTaskExecutor.class
 vn/edu/hust/medium/config/ThymeleafConfiguration.class
 vn/edu/hust/medium/web/rest/CommentResource.class
 vn/edu/hust/medium/security/Http401UnauthorizedEntryPoint.class
+vn/edu/hust/medium/service/LoveService.class
+vn/edu/hust/medium/service/impl/StoryServiceImpl.class
 vn/edu/hust/medium/config/JHipsterProperties$Async.class
 vn/edu/hust/medium/web/rest/LogsResource.class
 vn/edu/hust/medium/domain/util/JSR310DateConverters$ZonedDateTimeToDateConverter.class
@@ -29,6 +31,7 @@ vn/edu/hust/medium/config/CloudDatabaseConfiguration.class
 vn/edu/hust/medium/config/social/SocialConfiguration.class
 vn/edu/hust/medium/repository/search/CommentSearchRepository.class
 vn/edu/hust/medium/config/locale/AngularCookieLocaleResolver$1.class
+vn/edu/hust/medium/service/CommentService.class
 vn/edu/hust/medium/service/dto/UserDTO.class
 vn/edu/hust/medium/web/rest/errors/ErrorConstants.class
 vn/edu/hust/medium/config/JHipsterProperties$Mail.class
@@ -50,6 +53,7 @@ vn/edu/hust/medium/repository/LoveRepository.class
 vn/edu/hust/medium/config/audit/AuditEventConverter.class
 vn/edu/hust/medium/config/JHipsterProperties$Http$Cache.class
 vn/edu/hust/medium/config/JHipsterProperties.class
+vn/edu/hust/medium/service/impl/CommentServiceImpl.class
 vn/edu/hust/medium/repository/CommentRepository.class
 vn/edu/hust/medium/config/JHipsterProperties$Metrics$Graphite.class
 vn/edu/hust/medium/repository/StoryRepository.class
@@ -81,8 +85,11 @@ vn/edu/hust/medium/web/rest/errors/ErrorVM.class
 vn/edu/hust/medium/config/DefaultProfileUtil.class
 vn/edu/hust/medium/config/DatabaseConfiguration.class
 vn/edu/hust/medium/config/DateTimeFormatConfiguration.class
+vn/edu/hust/medium/service/AuthorService.class
 vn/edu/hust/medium/web/rest/errors/ExceptionTranslator.class
+vn/edu/hust/medium/service/impl/AuthorServiceImpl.class
 vn/edu/hust/medium/domain/util/JSR310DateConverters$DateToLocalDateConverter.class
+vn/edu/hust/medium/service/StoryService.class
 vn/edu/hust/medium/service/mapper/UserMapper.class
 vn/edu/hust/medium/service/SocialService.class
 vn/edu/hust/medium/repository/PersistenceAuditEventRepository.class
@@ -95,6 +102,7 @@ vn/edu/hust/medium/domain/util/JSR310PersistenceConverters.class
 vn/edu/hust/medium/config/CacheConfiguration.class
 vn/edu/hust/medium/repository/search/UserSearchRepository.class
 vn/edu/hust/medium/config/AsyncConfiguration.class
+vn/edu/hust/medium/service/impl/LoveServiceImpl.class
 vn/edu/hust/medium/config/JHipsterProperties$Metrics$Jmx.class
 vn/edu/hust/medium/repository/search/AuthorSearchRepository.class
 vn/edu/hust/medium/config/JHipsterProperties$Metrics.class

@@ -5,7 +5,7 @@
         .module('mediumApp')
         .config(bootstrapMaterialDesignConfig);
 
-    compileServiceConfig.$inject = [];
+     bootstrapMaterialDesignConfig.$inject = [];
 
     function bootstrapMaterialDesignConfig() {
         $.material.init();

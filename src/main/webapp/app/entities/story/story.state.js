@@ -105,6 +105,7 @@
                                 numberOfLove: null,
                                 numberOfComment: null,
                                 urlImage: null,
+                                summary: null,
                                 id: null
                             };
                         }
