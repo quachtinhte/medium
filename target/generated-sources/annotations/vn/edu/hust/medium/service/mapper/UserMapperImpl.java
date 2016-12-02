@@ -20,7 +20,7 @@ import vn.edu.hust.medium.service.dto.UserDTO;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2016-11-30T11:15:17+0700",
+    date = "2016-12-02T09:27:27+0700",
 
     comments = "version: 1.1.0.CR2, compiler: javac, environment: Java 1.8.0_101 (Oracle Corporation)"
 

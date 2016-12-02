@@ -69,7 +69,7 @@ public class CommentResource {
               .headers(HeaderUtil.createEntityCreationAlert("comment", result.getId().toString()))
               .body(result);
         }
-        comment.setStoryOrder(0);
+        comment.setStoryOrder(1);
           //
 	  Comment result = commentRepository.save(comment);
 	  commentSearchRepository.save(result);

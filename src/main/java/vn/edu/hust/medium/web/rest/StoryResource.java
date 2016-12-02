@@ -84,7 +84,23 @@ public class StoryResource {
             .headers(HeaderUtil.createEntityUpdateAlert("story", story.getId().toString()))
             .body(result);
     }
-
+/**
+*PUT increase storyOrder
+**/
+	@PostMapping("/stories/increase")
+    @Timed
+    public ResponseEntity<Story> updateStoryIncrease(@RequestBody Story story) throws URISyntaxException {
+        log.debug("REST request to update Story : {}", story);
+        if (story.getId() == null) {
+            return createStory(story);
+        }
+		story.setNumberOfComment(story.getNumberOfComment()+1);
+        Story result = storyRepository.save(story);
+        storySearchRepository.save(result);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("story", story.getId().toString()))
+            .body(result);
+    }
     /**
      * GET  /stories : get all the stories.
      *

@@ -2,12 +2,14 @@
     'use strict';
 
     angular
-        .module('mediumApp')
+        .module('mediumApp').config(function($routeProvider){
+          console.log("hello world");
+        })
         .controller('StoryController', StoryController);
 
     StoryController.$inject = ['$scope', '$state', 'DataUtils', 'Story', 'StorySearch', 'ParseLinks', 'AlertService','$resource','Principal'];
 
-    function StoryController ($scope, $state, DataUtils, Story, StorySearch, ParseLinks, AlertService, $resource) {
+    function StoryController ($scope, $state, DataUtils, Story, StorySearch, ParseLinks, AlertService, $resource,Principal) {
         var vm = this;
         /*
         *
@@ -33,9 +35,14 @@
         */
         vm.account = null;
         vm.isSaving=true;
+    		vm.isAuthenticated=null;
+    		vm.save = save;
+    		//
+    		vm.info= null;
 
+    		//
         loadAll();
-        getAccount();
+        //getAccount();
 
         function loadAll () {
             if (vm.currentSearch) {
@@ -61,8 +68,11 @@
             }
 
             function onSuccess(data, headers) {
+
                 vm.links = ParseLinks.parse(headers('link'));
+                console.log(vm.links);
                 vm.totalItems = headers('X-Total-Count');
+                console.log(vm.totalItems);
                 for (var i = 0; i < data.length; i++) {
                     vm.stories.push(data[i]);
                 }
@@ -95,7 +105,7 @@
             vm.searchQuery = null;
             vm.currentSearch = null;
             vm.loadAll();
-        }
+        }//2016-11-28 09:30:34.933
 
         function search (searchQuery) {
             if (!searchQuery){
@@ -115,6 +125,12 @@
         function getAccount(){
           Principal.identity().then(function(account){
             vm.account = account;
+            vm.isAuthenticated = Principal.isAuthenticated;
+            var Info= $resource('api/authors'+vm.account.id,{},{'charge':{method:'GET'}});
+            $scope.info=Info.get({activated: true});
+            $scope.info.$promise.then(function(data){
+                vm.info=data;
+              });
           });
         }
 

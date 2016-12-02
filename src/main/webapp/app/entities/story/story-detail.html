@@ -1,4 +1,6 @@
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
 <div>
     <h2><span>Story</span> {{vm.story.id}}</h2>
     <hr>
@@ -63,27 +65,29 @@
 </div>
 <!--Danh sách comment sẽ hiện ở đây-->
 <!--done-->
-<!--
+
 <div class="comment">
 	<h3>Comment</h3>
 	<table class="jh-table table table-striped">
-	<tr ng-repeat="comment in vm.comments"><!--infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']"-->
-		<!--Nghi vấn
-->
+	
+    <tbody infinite-scroll="vm.loadPage(vm.order + 1)" infinite-scroll-disabled="vm.order >= vm.story.numberOfComment">
+		<tr ng-repeat="comment in vm.comments">
+		<!--Nghi vấn-->
 		<td>
-			<img ng-src='{{comment.userImgLink}}'>
-			<div><span>	{{comment.userCommentName}} say :</span></div>
-			<span>{{comment.commentContent}}</span>
+			<!--img ng-src='{{comment.userImgLink}}'-->
+			<div><span>	{{comment.userName}} say :</span></div>
+			<span>{{comment.content}}</span>
 		</td>
 
 		<div style="color:grey"><td>{{comment.timeCommented}} </td></div>
-
-	</tr>
+			</tr>
+  </tbody>
+	
 	</table>
 </div>
 <!--Khung comment-->
 <!---->
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<form id="editForm" name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group" ng-show="vm.comment.id">
@@ -99,9 +103,14 @@
 
 
     </div>
-    <div class="modal-footer">
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+    <div class="modal-footer"><!--ng-disabled="editForm.$invalid || vm.isSaving"-->
+        <button type="submit"  class="btn btn-primary" onclick="myFunction()" value="Reset form">
             <span class="glyphicon glyphicon-save"><!--Sửa chỗ này thành hình máy bay--></span>&nbsp;<span>Send</span>
         </button>
     </div>
 </form>
+<script>
+function myFunction() {
+    document.getElementById("editForm").reset();
+}
+</script>

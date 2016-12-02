@@ -42,7 +42,7 @@
             vm.story.urlImage='xxx.com';
             //timeCreated
             var d = new Date();
-            vm.story.timeCreated=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+            //vm.story.timeCreated=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
             vm.story.numberOfLove=0;
             vm.story.numberOfComment=0;
             vm.isSaving = true;

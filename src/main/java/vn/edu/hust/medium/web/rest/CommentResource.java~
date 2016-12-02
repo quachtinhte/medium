@@ -56,9 +56,9 @@ public class CommentResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("comment", "idexists", "A new comment cannot already have an ID")).body(null);
         }
         //Đoạn chương trình phụ này có thể bỏ đi nếu ghi đè được phương thức save
-        Comment resource = commentRepository.findOneByStoryIDOrderStoryOrderDesc(comment.getStoryID());
+        Comment resource = commentRepository.findTopByStoryIDOrderByStoryOrderDesc(comment.getStoryID());
 	//?
-	System.out.println("\n"+resource);
+        System.out.println("\n"+resource);
         if (resource!=null)
         {
           comment.setStoryOrder(resource.getStoryOrder()+1);
@@ -116,6 +116,10 @@ public class CommentResource {
         throws URISyntaxException {
         log.debug("REST request to get a page of Comments");
         Page<Comment> page = commentRepository.findAll(pageable);
+        //
+        // List<Comment> page2 = commentRepository.findOneByStoryIDOrderByStoryOrderAsc(2);
+        // System.out.println("\n --"+page2+"\n");
+        //
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/comments");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -2,8 +2,7 @@
     'use strict';
 
     angular
-        .module('mediumApp')
-        .controller('StoryController', StoryController);
+        .module('mediumApp').controller('StoryController', StoryController);
 
     StoryController.$inject = ['$scope', '$state', 'DataUtils', 'Story', 'StorySearch', 'ParseLinks', 'AlertService','$resource','Principal'];
 
@@ -33,12 +32,12 @@
         */
         vm.account = null;
         vm.isSaving=true;
-		vm.isAuthenticated=null;
-		vm.save = save;
-		//
-		vm.info= null;
+    		vm.isAuthenticated=null;
+    		vm.save = save;
+    		//
+    		vm.info= null;
 
-		//
+    		//
         loadAll();
         //getAccount();
 
@@ -66,8 +65,11 @@
             }
 
             function onSuccess(data, headers) {
+
                 vm.links = ParseLinks.parse(headers('link'));
+                console.log(vm.links);
                 vm.totalItems = headers('X-Total-Count');
+                console.log(vm.totalItems);
                 for (var i = 0; i < data.length; i++) {
                     vm.stories.push(data[i]);
                 }
