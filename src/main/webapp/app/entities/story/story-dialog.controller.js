@@ -39,7 +39,7 @@
             vm.story.author=data.login;
             vm.story.authorName=data.firstName+" "+data.lastName;
             vm.story.summary="xxx";//lấy câu đầu tiên||đoạn văn đầu tiên
-            vm.story.urlImage='xxx.com';
+            //vm.story.urlImage= "";
             //timeCreated
             var d = new Date();
             //vm.story.timeCreated=d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();

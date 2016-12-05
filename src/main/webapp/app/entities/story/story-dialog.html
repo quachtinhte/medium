@@ -71,12 +71,13 @@
                      />
         </div-->
 		<!--Create new image box-->
-        <!--div class="form-group">
+        <div class="form-group">
             <label class="control-label" for="field_urlImage">Url Image</label>
-            <input type="text" class="form-control" name="urlImage" id="field_urlImage"
+            <input type="url" class="form-control" name="urlImage" id="field_urlImage"
                     ng-model="vm.story.urlImage"
                      />
-        </div-->
+		<img src="{{vm.story.urlImage}}" alt="Image" style="width:180px;height:90px;"> 
+        </div>
         <!--div class="form-group">
             <label class="control-label" for="field_summary">Summary</label>
                 <textarea class="form-control" name="summary" id="field_summary"

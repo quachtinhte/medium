@@ -45,7 +45,7 @@
                     <th jh-sort-by="placeCreated"><span>Place Created</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="numberOfLove"><span>Number Of Love</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="numberOfComment"><span>Number Of Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="urlImage"><span>Url Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="urlImage"><span>Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="summary"><span>Summary</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -58,11 +58,11 @@
                     <td>{{story.authorID}}</td>
                     <td>{{story.authorName}}</td>
                     <td>{{story.category}}</td>
-                        <td>{{story.timeCreated | date:'mediumDate'}}</td>
+                    <td>{{story.timeCreated | date:'mediumDate'}}</td>
                     <td>{{story.placeCreated}}</td>
                     <td>{{story.numberOfLove}}</td>
                     <td>{{story.numberOfComment}}</td>
-                    <td>{{story.urlImage}}</td>
+                    <td>{{story.title}}</td>
                     <td>{{story.summary}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
