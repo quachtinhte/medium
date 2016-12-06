@@ -82,7 +82,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: medium@localhost
+        from: toanquach.bk59@gmail.com
     swagger:
         title: medium API
         description: medium API documentation

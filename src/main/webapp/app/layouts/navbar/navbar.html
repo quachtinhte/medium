@@ -1,5 +1,38 @@
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container">
+<header>
+
+  <div class="container">
+      <div class="row">
+        <div class="logo col-md-6 col-sm-6 col-xs-12">
+          <h1>
+            <a href="#">
+              <div ng-cloak>
+
+
+                    <div ng-switch="vm.isAuthenticated()">
+                      <div class="" ng-switch-when="true">
+
+                          Hello {{vm.account.login}} !
+      <!--Avatar-->
+                      </div>
+                    </div>
+
+              </div>
+           </a>
+         </h1>
+      </div>
+        <div class="search col-md-6 col-sm-6 col-xs-12 text-right">
+          <form method="get" action="#">
+            <input type="text" placeholder="Nhập từ khóa tìm kiếm" id="q" name="q" value="">
+            <input type="submit" value="Tìm Kiếm">
+          </form>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+  <!--nav class="navbar navbar-inverse" role="navigation"-->
+    <!--div class="container"-->
+    <div class="header-menu">
+
+      <nav class="navbar navbar-fixed-top">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
                 <span class="sr-only">Toggle navigation</span>
@@ -7,13 +40,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png"/>
-                <span>Medium</span> <span class="navbar-version">v{{VERSION}}</span>
-            </a>
+            <!--a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
+                <img class="logo-img" src="content/images/logo.png"/>
+                <span>edium</span> <span class="navbar-version">v{{VERSION}}</span>
+            </a-->
         </div>
+
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-left">
                 <li ui-sref-active="active">
                     <a ui-sref="home" ng-click="vm.collapseNavbar()">
                         <span class="glyphicon glyphicon-home"></span>
@@ -21,45 +55,37 @@
                     </a>
                 </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown>
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm">
-                                Entities
-                            </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
-                            <a ui-sref="story" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                <span >Story</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="author" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                <span >Author</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="love" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                <span >Love</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="comment" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                <span >Comment</span>
-                            </a>
-                        </li>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                    </ul>
+                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                	<a class="dropdown-toggle" uib-dropdown-toggle href="" id="publish-menu" ui-sref="story" ng-click="vm.collapseNavbar()">
+                      <span>
+                          <!--span class="glyphicon glyphicon-heart"></span-->
+                          <span class="hidden-sm">
+                            <!--li ui-sref-active="active" >
+                                <a ui-sref="story" ng-click="vm.collapseNavbar()">
+                                    <!<span class="glyphicon glyphicon-asterisk"></span>-->
+                                    <span >For You</span>
+                                <!--/a-->
+                            <!--/li-->
+                          </span>
+                          <!--<b class="caret"></b>-->
+                      </span>
+                  </a>
                 </li>
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown dropdown>
+                <!--li ng-class="{active: vm.$state.includes('entity')}.new" ng-switch-when="true" uib-dropdown class="dropdown pointer2">
+                	<a class="dropdown-toggle2" uib-dropdown-toggle href="" id="publish-menu2" ui-sref="story.new" ng-click="vm.collapseNavbar()">
+                      <span>
+                          <!--<span class="glyphicon glyphicon-th-list"></span>-->
+                          <!--span class="glyphicon glyphicon-star"></span>
+                          <span class="hidden-sm">
+                                    <!--<span class="glyphicon glyphicon-asterisk"></span>-->&nbsp;
+                                    <!--span >Write your Story</span>
+                          </span>
+                          <!--<b class="caret"></b>-->
+                      <!--/span>
+                  </a>
+                </li-->
+
+                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>
                             <span class="glyphicon glyphicon-user"></span>
@@ -108,7 +134,7 @@
                         </li>
                     </ul>
                 </li>
-                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
+                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
@@ -170,5 +196,8 @@
                 </li>
             </ul>
         </div>
+      </nav>
     </div>
-</nav>
+  </div>
+  <!--/nav-->
+</header>

@@ -1,4 +1,4 @@
-<div ng-cloak>
+<!--div ng-cloak>
     <div class="row">
         <div class="col-md-4">
             <span class="hipster img-responsive img-rounded"></span>
@@ -38,4 +38,59 @@
             </p>
         </div>
     </div>
-</div>
+</div-->
+
+
+<html>
+	<head>
+		<!--link rel="shortcut icon" type="image/x-icon" href="web/images/fave-icon.png" /-->
+	  	<link href="content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	   <script type="text/javascript">ontent
+			$(window).load(function(){
+				$('div.description').each(function(){
+					$(this).css('display', 'block');
+				});
+
+				$('div.content-top-grid').hover(function(){
+					$(this).children('.description').stop().fadeTo(500, 1);
+				},function(){
+					$(this).children('.description').stop().fadeTo(500, 0);
+				});
+
+			});
+	</script>
+	</head>
+	<body>
+    <div id="wrapper">
+			<div class="">
+	        	<img src="hinhnen.png" alt="" />
+			</div>
+		  <div class="container">
+		    <div class="row">
+
+		      <div class="content col-md-9 col-sm-9 col-xs-12">
+		        <div class="box-index">
+
+            </div>
+		      </div>
+		      <div class="sidebar col-md-3 col-sm-3 col-xs-12">
+		        <div class="sidebar-item">
+		          <h4 class="widget-title">{{story.title}}</h4>
+		          <div class="textwidget">
+		            <img src="404.jpg">
+		          </div>
+		        </div>
+		        <div class="sidebar-item">
+		          <h4 class="widget-title">Tiêu đề sidebar</h4>
+		          <div class="textwidget">
+		            <img src="404.jpg">
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+  </body>
+</html>
