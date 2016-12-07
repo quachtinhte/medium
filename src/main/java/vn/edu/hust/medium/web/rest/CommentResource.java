@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import java.time.ZonedDateTime;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -40,7 +41,7 @@ public class CommentResource {
 
     @Inject
     private CommentSearchRepository commentSearchRepository;
-
+    private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
     /**
      * POST  /comments : Create a new comment.
      *
@@ -62,6 +63,7 @@ public class CommentResource {
         if (resource!=null)
         {
           comment.setStoryOrder(resource.getStoryOrder()+1);
+          comment.setTimeCommented(lastModifiedDate);
           //
           Comment result = commentRepository.save(comment);
           commentSearchRepository.save(result);

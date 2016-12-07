@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import java.time.LocalDate;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -40,7 +41,7 @@ public class StoryResource {
 
     @Inject
     private StorySearchRepository storySearchRepository;
-
+    private LocalDate localDateTime;
     /**
      * POST  /stories : Create a new story.
      *
@@ -55,6 +56,7 @@ public class StoryResource {
         if (story.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("story", "idexists", "A new story cannot already have an ID")).body(null);
         }
+        story.setTimeCreated(localDateTime.now());
         Story result = storyRepository.save(story);
         storySearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/stories/" + result.getId()))
@@ -78,6 +80,8 @@ public class StoryResource {
         if (story.getId() == null) {
             return createStory(story);
         }
+        story.setTimeCreated(localDateTime.now());
+        //story.getAuthorities==getCurrentUserLogin
         Story result = storyRepository.save(story);
         storySearchRepository.save(result);
         return ResponseEntity.ok()

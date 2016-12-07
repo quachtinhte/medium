@@ -46,14 +46,16 @@
       				//console.log(vm.comment);
       				//console.log(data);
       				vm.isSaving = true;
-                  if (vm.comment.id !== null) {
+                  if (vm.comment.id !== null) {//id=>id==null
                       Comment.update(vm.comment, onSaveSuccess, onSaveError);
+                      console.log("update");
       		        console.log(vm.comment);
                   } else {
                       Comment.save(vm.comment, onSaveSuccess, onSaveError);
+                      console.log("save");
   		                console.log(vm.comment);
                   }
-		//document.getElementById("editForm").reset();
+		          //document.getElementById("editForm").reset();
         			function onSaveSuccess (result) {
         				//$routes.reload()
         				console.log("success");
@@ -68,7 +70,7 @@
 							vm.story=data;
 						});
 						console.log(Story.get({id : $stateParams.id}).$promise);
-//						
+          //						
 					});
 					function onSuccess(){}
 					function onError(){}
